@@ -1,0 +1,3 @@
+{{#each inputs}}
+{{toPythonIdentifier name}}: {{#parameterType type components}}{{/parameterType}}{{^if @last}}, {{/if~}}
+{{/each~}}

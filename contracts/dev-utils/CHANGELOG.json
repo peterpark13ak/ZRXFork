@@ -1,0 +1,113 @@
+[
+    {
+        "timestamp": 1567521715,
+        "version": "0.0.9",
+        "changes": [
+            {
+                "note": "Dependencies updated"
+            }
+        ]
+    },
+    {
+        "timestamp": 1566446343,
+        "version": "0.0.8",
+        "changes": [
+            {
+                "note": "Dependencies updated"
+            }
+        ]
+    },
+    {
+        "timestamp": 1565296576,
+        "version": "0.0.7",
+        "changes": [
+            {
+                "note": "Dependencies updated"
+            }
+        ]
+    },
+    {
+        "timestamp": 1564607468,
+        "version": "0.0.6",
+        "changes": [
+            {
+                "note": "Dependencies updated"
+            }
+        ]
+    },
+    {
+        "version": "0.0.5",
+        "changes": [
+            {
+                "note": "Updated calls to <contract wrapper>.deployFrom0xArtifactAsync to include artifact dependencies.",
+                "pr": 1995
+            }
+        ],
+        "timestamp": 1564604963
+    },
+    {
+        "timestamp": 1563957393,
+        "version": "0.0.5",
+        "changes": [
+            {
+                "note": "Dependencies updated"
+            }
+        ]
+    },
+    {
+        "timestamp": 1563193019,
+        "version": "0.0.4",
+        "changes": [
+            {
+                "note": "Dependencies updated"
+            }
+        ]
+    },
+    {
+        "timestamp": 1563047529,
+        "version": "0.0.3",
+        "changes": [
+            {
+                "note": "Dependencies updated"
+            }
+        ]
+    },
+    {
+        "timestamp": 1563006338,
+        "version": "0.0.2",
+        "changes": [
+            {
+                "note": "Dependencies updated"
+            }
+        ]
+    },
+    {
+        "version": "0.0.1",
+        "changes": [
+            {
+                "note": "Create dev-utils package",
+                "pr": 1848
+            },
+            {
+                "note": "Add `LibAssetData` and `LibTransactionDecoder` contracts",
+                "pr": 1848
+            },
+            {
+                "note": "Refactor `LibAssetData` to only check 0x-specific allowances",
+                "pr": 1848
+            },
+            {
+                "note": "Refactor `LibAssetData` balance/allowance checks to never revert",
+                "pr": 1848
+            },
+            {
+                "note": "Refactor `OrderValidationUtils` to calculate `fillableTakerAssetAmount`",
+                "pr": 1848
+            },
+            {
+                "note": "Add support for StaticCallProxy",
+                "pr": 1863
+            }
+        ]
+    }
+]

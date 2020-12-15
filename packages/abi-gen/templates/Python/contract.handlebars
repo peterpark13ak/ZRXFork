@@ -1,0 +1,100 @@
+"""Generated wrapper for {{contractName}} Solidity contract."""
+
+# pylint: disable=too-many-arguments
+
+import json
+from typing import (  # pylint: disable=unused-import
+    Any,
+    List,
+    Optional,
+    Tuple,
+    Union,
+)
+
+from eth_utils import to_checksum_address
+from mypy_extensions import TypedDict  # pylint: disable=unused-import
+from hexbytes import HexBytes
+from web3 import Web3
+from web3.contract import ContractFunction
+from web3.datastructures import AttributeDict
+from web3.providers.base import BaseProvider
+
+from zero_ex.contract_wrappers.bases import ContractMethod, Validator
+from zero_ex.contract_wrappers.tx_params import TxParams
+
+
+# Try to import a custom validator class definition; if there isn't one,
+# declare one that we can instantiate for the default argument to the
+# constructor for {{contractName}} below.
+try:
+    # both mypy and pylint complain about what we're doing here, but this
+    # works just fine, so their messages have been disabled here.
+    from . import (  # type: ignore # pylint: disable=import-self
+        {{contractName}}Validator,
+    )
+except ImportError:
+
+    class {{contractName}}Validator(  # type: ignore
+        Validator
+    ):
+        """No-op input validator."""
+
+
+{{tupleDefinitions ABIString}}
+
+{{#each methods}}
+{{> method_class contractName=../contractName}}
+{{/each}}
+
+# pylint: disable=too-many-public-methods,too-many-instance-attributes
+class {{contractName}}:
+    """Wrapper class for {{contractName}} Solidity contract.{{docBytesIfNecessary ABIString}}"""
+{{#each methods}}
+    {{toPythonIdentifier this.languageSpecificName}}: {{toPythonClassname this.languageSpecificName}}Method
+    """Constructor-initialized instance of
+    :class:`{{toPythonClassname this.languageSpecificName}}Method`.
+    """
+
+{{/each}}
+
+    def __init__(
+        self,
+        provider: BaseProvider,
+        contract_address: str,
+        validator: {{contractName}}Validator = None,
+    ):
+        """Get an instance of wrapper for smart contract.
+
+        :param provider: instance of :class:`web3.providers.base.BaseProvider`
+        :param contract_address: where the contract has been deployed
+        :param validator: for validation of method inputs.
+        """
+        self.contract_address = contract_address
+
+        if not validator:
+            validator = {{contractName}}Validator(provider, contract_address)
+
+        self._web3_eth = Web3(  # type: ignore # pylint: disable=no-member
+            provider
+        ).eth
+
+        {{#if methods}}
+        functions = self._web3_eth.contract(address=to_checksum_address(contract_address), abi={{contractName}}.abi()).functions
+
+        {{#each methods}}
+        self.{{toPythonIdentifier this.languageSpecificName}} = {{toPythonClassname this.languageSpecificName}}Method(provider, contract_address, functions.{{this.name}}, validator)
+
+        {{/each}}
+        {{/if}}
+{{#each events}}
+{{> event contractName=../contractName}}
+{{/each}}
+
+    @staticmethod
+    def abi():
+        """Return the ABI to the underlying contract."""
+        return json.loads(
+            '{{{ABIString}}}'  # noqa: E501 (line-too-long)
+        )
+
+# pylint: disable=too-many-lines
